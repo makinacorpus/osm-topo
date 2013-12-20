@@ -1,19 +1,9 @@
 OSM Bright
 ==========
 
-![screenshot](https://raw.github.com/mapbox/osm-bright/master/preview.png)
+OSM Topo is a mountain-oriented style for OpenStreetMap data. It is based on [OSM Bright][] by MapBox.
 
-OSM Bright is a sensible starting point for quickly making beautiful maps based
-on an OpenStreetMap database. It is written in the [Carto][] styling language
-and can be opened as a project in [TileMill][].
-
-The style is still a work in progress and you are encouraged to use the
-[issue tracker][] to note missing features or problems with the current
-implementation. 
-
-[Carto]: http://github.com/mapbox/carto/
-[TileMill]: http://tilemill.com/
-[issue tracker]: http://github.com/developmentseed/osm-bright/issues/
+[OSM Bright]: https://github.com/mapbox/osm-bright
 
 Setup Instructions
 ------------------
