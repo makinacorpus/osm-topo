@@ -38,15 +38,18 @@ Map { font-directory: url(./fonts); }
 /* ================================================================== */
 
 @land:              #FCFBE7;
-@water:             #C4DFF6;
+@water:             #95c8f4;
 @grass:             #E6F2C1;
 @beach:             #FFEEC7;
 @park:              #DAF2C1;
 @cemetery:          #D6DED2;
 @wooded:            #C3D9AD;
 @agriculture:       #F2E8B6;
+@heath:             #dde295;
+@rock:              #e6e6e6;
+@glacier:           #eefffb;
 
-@building:          #E4E0E0;
+@building:          #d8d4cd;
 @hospital:          rgb(229,198,195);
 @school:            #FFF5CC;
 @sports:            #B8E6B8;
@@ -55,6 +58,12 @@ Map { font-directory: url(./fonts); }
 @commercial:        @land * 0.97;
 @industrial:        @land * 0.96;
 @parking:           #EEE;
+
+/* ================================================================== */
+/* MAN MADE COLORS
+/* ================================================================== */
+
+@aerialway:              #3c3c3c;
 
 /* ================================================================== */
 /* ROAD COLORS
@@ -69,19 +78,19 @@ Map { font-directory: url(./fonts); }
  *         inner fill (inline).
  */
 
-@motorway_line:     #E65C5C;
+@motorway_line:     #E54D4D;
 @motorway_fill:     lighten(@motorway_line,10%);
 @motorway_case:     @motorway_line * 0.9;
 
-@trunk_line:        #E68A5C;
+@trunk_line:        #E54D4D;
 @trunk_fill:        lighten(@trunk_line,10%);
 @trunk_case:        @trunk_line * 0.9;
 
-@primary_line:      #FFC859;
+@primary_line:      #E54D4D;
 @primary_fill:      lighten(@primary_line,10%);
 @primary_case:      @primary_line * 0.9;
 
-@secondary_line:    #FFE873;
+@secondary_line:    #FFC859;
 @secondary_fill:    lighten(@secondary_line,10%);
 @secondary_case:    @secondary_line * 0.9;
 
@@ -89,7 +98,7 @@ Map { font-directory: url(./fonts); }
 @standard_fill:     #fff;
 @standard_case:     @land * 0.9;
 
-@pedestrian_line:   @standard_line;
+@pedestrian_line:   #000;
 @pedestrian_fill:   #FAFAF5;
 @pedestrian_case:   @land;
 
@@ -108,6 +117,7 @@ Map { font-directory: url(./fonts); }
 /* ================================================================== */
 
 @admin_2:           #324;
+@admin_6:           #324;
 
 /* ================================================================== */
 /* LABEL COLORS
@@ -146,5 +156,4 @@ Map { font-directory: url(./fonts); }
 
 /* ****************************************************************** */
 
-
-
+@contour:           #4a2c20;

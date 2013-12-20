@@ -1,10 +1,101 @@
 /* BASE.MSS CONTENTS
+ * - 
  * - Landuse & landcover
  * - Water areas
  * - Water ways
  * - Administrative Boundaries
  *
  */
+
+/* ================================================================== */
+/* HILLSHADING & CONTOUR LINES
+/* ================================================================== */
+
+@contour-width: 0.8;
+
+#contour200[zoom>=13][zoom<16] {
+  line-width: @contour-width;
+  line-color: @contour;
+  line-smooth:0.8;
+  opacity:0.4;
+  [zoom>=12] {
+    line-width: 2 * @contour-width;
+  }
+}
+#contour50[zoom>=13][zoom<18] {
+  line-width: @contour-width;
+  line-color: @contour;
+  line-smooth:0.8;
+  opacity:0.4;
+  [zoom>=16] {
+    line-width: 2 * @contour-width;
+  }
+}
+#contour[zoom>=16] {
+  line-width: @contour-width;
+  line-color: @contour;
+  line-smooth:0.8;
+  opacity:0.4;
+}
+
+#eudempnr09hillshade::z13[zoom=13] {
+  image-filters: agg-stack-blur(1,1);
+}
+
+#eudempnr09hillshade::z14[zoom=14] {
+  image-filters: agg-stack-blur(3,3);
+}
+
+#eudempnr09hillshade::z15[zoom=15] {
+  image-filters: agg-stack-blur(8,8);
+}
+
+#eudempnr09hillshade::z16[zoom=16] {
+  image-filters: agg-stack-blur(14,14);
+}
+
+#eudempnr09hillshade::z17[zoom=17] {
+  image-filters: agg-stack-blur(24,24);
+}
+
+#landuse,
+#landuse_gen1,
+#landuse_gen0,
+#eudempnr09hillshade {
+  raster-scaling: bilinear;
+  raster-comp-op:multiply;
+}
+
+#eudempnr09hillshade {
+  raster-opacity:0.2;
+}
+
+/* ================================================================== */
+/* MOUNTAIN LINES
+/* ================================================================== */
+
+#mountain_lines {
+  [type='chair_lift'],
+  [type='drag_lift'],
+  [type='t-bar'],
+  [type='j-bar'],
+  [type='platter'],
+  [type='rope_tow'] {
+    [zoom >= 13] {
+      line-color: @aerialway;
+      line-width: 1.5;
+      ::pylons {
+        line-color: @aerialway;
+        line-width: 6;
+        line-dasharray: 1.5,30;
+      }
+    }
+  }
+}
+#mountain_lines[type='dam'][zoom >= 13] {
+  line-color: @aerialway;
+  line-width: 3;
+}
 
 /* ================================================================== */
 /* LANDUSE & LANDCOVER
@@ -20,15 +111,20 @@
 #landuse_gen0[zoom>3][zoom<=9],
 #landuse_gen1[zoom>9][zoom<=12],
 #landuse[zoom>12] {
+  [type='bare_rock']     { polygon-fill: @rock; }
   [type='cemetery']      { polygon-fill: @cemetery; }
   [type='college']       { polygon-fill: @school; }
   [type='commercial']    { polygon-fill: @industrial; }
   [type='common']        { polygon-fill: @park; }
   [type='forest']        { polygon-fill: @wooded; }
   [type='golf_course']   { polygon-fill: @sports; }
+  [type='glacier']       { polygon-fill: @glacier; }
   [type='grass']         { polygon-fill: @grass; }
+  [type='grassland']     { polygon-fill: @grass; }
+  [type='heath']         { polygon-fill: @heath; }
   [type='hospital']      { polygon-fill: @hospital; }
   [type='industrial']    { polygon-fill: @industrial; }
+  [type='meadow']        { polygon-fill: @grass; }
   [type='park']          { polygon-fill: @park; }
   [type='parking']       { polygon-fill: @parking; }
   [type='pedestrian']    { polygon-fill: @pedestrian_fill; }
@@ -39,6 +135,10 @@
   [type='stadium']       { polygon-fill: @sports; }
   [type='university']    { polygon-fill: @school; }
   [type='wood']          { polygon-fill: @wooded; }
+}
+
+#landuse[zoom>12] {
+  [type='scree']         { polygon-pattern-file: url(img/scree.png);}
 }
 
 #landuse_overlays[type='nature_reserve'][zoom>6] {
@@ -65,11 +165,11 @@
   polygon-fill:@building;
   [zoom>=14] {
     line-color:darken(@building,5%);
-    line-width:0.2;
+    line-width:0.3;
   }
   [zoom>=16] {
     line-color:darken(@building,10%);
-    line-width:0.4;
+    line-width:0.6;
   }
 }
 // At the highest zoom levels, render buildings in fancy pseudo-3D.
@@ -120,8 +220,8 @@ Map { background-color: @water; }
     [zoom=14]{ line-width: 1.5; }
   }
   [type='stream'] {
-    [zoom=13]{ line-width: 0.2; }
-    [zoom=14]{ line-width: 0.4; }
+    [zoom=13]{ line-width: 0.4; }
+    [zoom=14]{ line-width: 0.8; }
   }
 }
   
@@ -167,6 +267,13 @@ Map { background-color: @water; }
   [zoom=2] { line-opacity: 0.25; }
   [zoom=3] { line-opacity: 0.3; }
   [zoom=4] { line-opacity: 0.4; }
+}
+
+#admin[admin_level='8'][zoom>10] {
+  line-smooth:0.5;
+  line-color:@admin_2;
+  line-width:0.8;
+  line-dasharray:0.8,5
 }
 
 /* ================================================================== */

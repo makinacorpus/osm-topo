@@ -1,4 +1,6 @@
 /* LABELS.MSS CONTENTS:
+ * - contour lines elevation
+ * - mountain features
  * - place names
  * - area labels
  * - waterway labels 
@@ -10,6 +12,64 @@
    labels placed along a line. We can fake this using the replace()
    function in the text-name parameter by replacing each character
    with itself followed by one or more spaces. */
+
+/* ================================================================== */
+/* CONTOUR LINES ELEVATION
+/* ================================================================== */
+
+#contour200_label[zoom>=13][zoom<16] {
+  text-name:"[ele].replace('([0-9]+)\.(.+)','$1')";
+  text-face-name:@sans;
+  text-placement:line;
+  text-fill:@contour;
+  text-halo-fill: @place_halo;
+  text-halo-radius: 1;
+}
+
+#contour50_label[zoom>=16][zoom<18] {
+  text-name:"[ele].replace('([0-9]+)\.(.+)','$1')";
+  text-face-name:@sans;
+  text-placement:line;
+  text-fill:@contour;
+  text-halo-fill: @place_halo;
+  text-halo-radius: 1;
+}
+
+/* ================================================================== */
+/* MOUNTAIN FEATURES
+/* ================================================================== */
+
+#mountain_points[type='peak'][zoom>=13][zoom<18] {
+  text-name: "[name] + ' _' + [ele]";
+  text-face-name: @sans;
+  text-fill: @contour;
+  text-halo-fill: @place_halo;
+  text-halo-radius: 1;
+  text-wrap-width: 1;
+  text-wrap-character: '_';
+  [zoom>=13] { text-size: 13; }
+  [zoom>=14] { text-size: 14; }
+  [zoom>=15] { text-size: 15; }
+  [zoom>=16] { text-size: 16; }
+  [zoom>=17] { text-size: 17; }
+}
+
+#mountain_points[type='alpine_hut'][zoom>=13][zoom<18] {
+  text-name: "[name]";
+  text-size: 11;
+  text-face-name: @sans;
+  text-fill: @contour;
+  text-halo-fill: @place_halo;
+  text-halo-radius: 1;
+  text-dy: 12;
+  text-allow-overlap: true;
+  marker-file: url(img/icon/shelter.svg);
+  marker-allow-overlap: true;
+  marker-width: 20;
+  [zoom>=16] { text-size: 13; }
+  [zoom>=17] { text-size: 14; }
+  [zoom>=18] { text-size: 15; }  
+}
 
 /* ================================================================== */
 /* PLACE NAMES
@@ -264,12 +324,12 @@
   // Bring in labels gradually as one zooms in, bases on polygon area
   [zoom>=10][area>102400000],
   [zoom>=11][area>25600000],
-  [zoom>=13][area>1600000],
-  [zoom>=14][area>320000],
-  [zoom>=15][area>80000],
-  [zoom>=16][area>20000],
-  [zoom>=17][area>5000],
-  [zoom>=18][area>=0] {
+  [zoom>=13][type!='administrative'][area>1600000],
+  [zoom>=14][type!='administrative'][area>320000],
+  [zoom>=15][type!='administrative'][area>80000],
+  [zoom>=16][type!='administrative'][area>20000],
+  [zoom>=17][type!='administrative'][area>5000],
+  [zoom>=18][type!='administrative'][area>=0] {
     text-name: "[name]";
     text-halo-radius: 1.5;
     text-face-name:@sans;
@@ -306,25 +366,25 @@
       text-halo-fill: lighten(@water, 10);
     }
   }
-  [zoom=15][area>1600000],
-  [zoom=16][area>80000],
-  [zoom=17][area>20000],
-  [zoom=18][area>5000] {
+  [zoom=15][type!='administrative'][area>1600000],
+  [zoom=16][type!='administrative'][area>80000],
+  [zoom=17][type!='administrative'][area>20000],
+  [zoom=18][type!='administrative'][area>5000] {
     text-name: "[name]";
     text-size: 13;
     text-wrap-width: 60;
     text-character-spacing: 1;
     text-halo-radius: 2;
   }
-  [zoom=16][area>1600000],
-  [zoom=17][area>80000],
-  [zoom=18][area>20000] {
+  [zoom=16][type!='administrative'][area>1600000],
+  [zoom=17][type!='administrative'][area>80000],
+  [zoom=18][type!='administrative'][area>20000] {
     text-size: 15;
     text-character-spacing: 2;
     text-wrap-width: 120;
   }
-  [zoom>=17][area>1600000],
-  [zoom>=18][area>80000] {
+  [zoom>=17][type!='administrative'][area>1600000],
+  [zoom>=18][type!='administrative'][area>80000] {
     text-size: 20;
     text-character-spacing: 3;
     text-wrap-width: 180;
