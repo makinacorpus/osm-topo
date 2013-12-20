@@ -28,15 +28,15 @@ def clean():
   for f in glob("build/*.html"): unlink(f)
 
 def build():
-  #copy the osm-bright tree to a build dir
-  copy_tree("osm-bright", "build")
+  #copy the osm-topo tree to a build dir
+  copy_tree("osm-topo", "build")
 
   #remove the mml templates
   for f in glob("build/*.mml"):
     unlink(f)
 
   #load the project template
-  templatefile = open(join('osm-bright', 'osm-bright.%s.mml' % config["importer"]))
+  templatefile = open(join('osm-topo', 'osm-topo.%s.mml' % config["importer"]))
   template = loads(templatefile.read())
 
   #fill in the project template
@@ -70,13 +70,13 @@ def install():
   copy_tree("build", output_dir)
 
 def pull():
-  #copy the project from mapbox to osm-bright
+  #copy the project from mapbox to osm-topo
   sanitized_name = re.sub("[^\w]", "", config["name"])
   output_dir = join(config["path"], sanitized_name)
-  copy_tree(output_dir, "osm-bright", ("layers", ".thumb.png"))
+  copy_tree(output_dir, "osm-topo", ("layers", ".thumb.png"))
 
   #load the project file
-  project = loads(open(join("osm-bright", "project.mml")).read())
+  project = loads(open(join("osm-topo", "project.mml")).read())
 
   #Make sure we reset postgis data in the project file back to its default values
   defaultconfig = defaultdict(defaultdict)
@@ -86,7 +86,7 @@ def pull():
   defaultconfig["postgis"]["user"]     = ""
   defaultconfig["postgis"]["password"] = ""
   defaultconfig["postgis"]["extent"] = "-20037508.34 -20037508.34 20037508.34 20037508.34"
-  defaultconfig["name"] = "OSM Bright"
+  defaultconfig["name"] = "OSM Topo"
   defaultconfig["processed_p"] = "http://tilemill-data.s3.amazonaws.com/osm/coastline-good.zip"
   defaultconfig["shoreline_300"] = "http://tilemill-data.s3.amazonaws.com/osm/shoreline_300.zip"
   defaultconfig["land"] = "http://mapbox-geodata.s3.amazonaws.com/natural-earth-1.3.0/physical/10m-land.zip"
@@ -105,11 +105,11 @@ def pull():
         elif opt in layer["Datasource"]:
           del layer["Datasource"][opt]
 
-  project_template = open(join("osm-bright", "osm-bright.%s.mml") % config["importer"], 'w')
+  project_template = open(join("osm-topo", "osm-topo.%s.mml") % config["importer"], 'w')
   project_template.write(dumps(project, sort_keys=True, indent=2))
 
   #now delete project.mml
-  unlink(join("osm-bright", "project.mml"))
+  unlink(join("osm-topo", "project.mml"))
 
 if __name__ == "__main__":
   if sys.argv[-1] == "clean":
