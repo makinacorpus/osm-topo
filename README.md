@@ -1,6 +1,8 @@
 OSM Bright
 ==========
 
+![screenshot](https://raw.github.com/makinacorpus/osm-topo/master/preview.png)
+
 OSM Topo is a mountain-oriented style for OpenStreetMap data. It is based on [OSM Bright][] by MapBox.
 
 [OSM Bright]: https://github.com/mapbox/osm-bright
