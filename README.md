@@ -1,4 +1,4 @@
-OSM Bright
+OSM Topo
 ==========
 
 ![screenshot](https://raw.github.com/makinacorpus/osm-topo/master/preview.png)
