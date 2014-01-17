@@ -98,7 +98,7 @@ Map { font-directory: url(./fonts); }
 @standard_fill:     #fff;
 @standard_case:     @land * 0.9;
 
-@pedestrian_line:   #000;
+@pedestrian_line:   #242424;
 @pedestrian_fill:   #FAFAF5;
 @pedestrian_case:   @land;
 

@@ -17,7 +17,7 @@
   line-width: @contour-width;
   line-color: @contour;
   line-smooth:0.8;
-  opacity:0.4;
+  opacity:0.3;
   [zoom>=12] {
     line-width: 2 * @contour-width;
   }
@@ -26,7 +26,7 @@
   line-width: @contour-width;
   line-color: @contour;
   line-smooth:0.8;
-  opacity:0.4;
+  opacity:0.3;
   [zoom>=16] {
     line-width: 2 * @contour-width;
   }
@@ -35,7 +35,7 @@
   line-width: @contour-width;
   line-color: @contour;
   line-smooth:0.8;
-  opacity:0.4;
+  opacity:0.3;
 }
 
 #eudempnr09hillshade::z13[zoom=13] {
@@ -67,7 +67,7 @@
 }
 
 #eudempnr09hillshade {
-  raster-opacity:0.2;
+  raster-opacity:0.3;
 }
 
 /* ================================================================== */
@@ -130,7 +130,9 @@
   [type='pedestrian']    { polygon-fill: @pedestrian_fill; }
   [type='pitch']         { polygon-fill: @sports; }
   [type='residential']   { polygon-fill: @residential; }
+  [type='rock']          { polygon-fill: @rock; }
   [type='school']        { polygon-fill: @school; }
+  [type='scrub']         { polygon-fill: @heath; }
   [type='sports_center'] { polygon-fill: @sports; }
   [type='stadium']       { polygon-fill: @sports; }
   [type='university']    { polygon-fill: @school; }
@@ -261,20 +263,29 @@ Map { background-color: @water; }
 /* ================================================================== */
 
 
-#admin[admin_level=2][zoom>1] {
+#admin[admin_level='2'][zoom>1] {
   line-color:@admin_2;
   line-width:0.5;
+  line-smooth:0.5;
   [zoom=2] { line-opacity: 0.25; }
   [zoom=3] { line-opacity: 0.3; }
   [zoom=4] { line-opacity: 0.4; }
+  [zoom>=11] {
+    line-width:0;
+    ::horizontal {
+      line-width:1;
+      line-dasharray: 10,10;
+    }
+  }
 }
 
+/*
 #admin[admin_level='8'][zoom>10] {
-  line-smooth:0.5;
   line-color:@admin_2;
   line-width:0.8;
   line-dasharray:0.8,5
 }
+*/
 
 /* ================================================================== */
 /* BARRIER POINTS

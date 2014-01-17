@@ -63,9 +63,28 @@
   text-halo-radius: 1;
   text-dy: 12;
   text-allow-overlap: true;
-  marker-file: url(img/icon/shelter.svg);
+  marker-file: url(img/icon/hut.svg);
   marker-allow-overlap: true;
   marker-width: 20;
+  [zoom>=16] { text-size: 13; }
+  [zoom>=17] { text-size: 14; }
+  [zoom>=18] { text-size: 15; }  
+}
+
+#mountain_points[type='shelter'][zoom>13][zoom<18] {
+  text-name: "[name]";
+  text-size:0;
+  text-face-name: @sans;
+  text-fill: @contour;
+  text-halo-fill: @place_halo;
+  text-halo-radius: 1;
+  text-dy: 12;
+  text-allow-overlap: true;
+  marker-file: url(img/icon/shelters.svg);
+  marker-allow-overlap: true;
+  marker-width: 15;
+  [zoom>=14] { text-size: 11; }
+  [zoom>=15] { text-size: 12; }
   [zoom>=16] { text-size: 13; }
   [zoom>=17] { text-size: 14; }
   [zoom>=18] { text-size: 15; }  
@@ -504,7 +523,6 @@
   text-name:'[name]';
   text-face-name:@sans;
   text-placement:line;
-  text-size:9;
   text-fill:@road_text;
   text-halo-fill:@road_halo;
   text-halo-radius:1;
